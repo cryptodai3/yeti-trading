@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="philosophy">
                 <h4>🎯 Daily Goal & Trading Philosophy</h4>
                 <ul>
-                    <li><strong>✅ Target only ${dailyProfitMin}-${dailyProfitMax}% profit per day</strong> ($${dailyProfitMin}-$${dailyProfitMax})</li>
+                    <li><strong>✅ Target only profit per day</strong> ($${dailyProfitMin}-$${dailyProfitMax})</li>
                     <li><strong>🚫 No overtrading</strong> – fewer, smarter trades</li>
                     <li><strong>🔒 No compounding or doubling promises</strong></li>
                     <li><strong>🙏 If you join Yetitrade expecting to double your money quickly, I'm sorry—this isn't the place for that.</strong></li>
