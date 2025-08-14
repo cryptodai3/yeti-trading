@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YetiTrade - Binary Trading Strategy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
             --primary: #1a365d;
@@ -23,7 +24,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
@@ -375,6 +376,56 @@
             margin-bottom: 0.8rem;
         }
         
+        /* Resources Section */
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .resource-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .resource-card .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .resource-card .btn:hover {
+            background-color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
         /* Footer */
         footer {
             background-color: var(--dark);
@@ -563,7 +614,7 @@
                 </div>
                 
                 <div id="strategy-display" class="strategy-display">
-                    <!-- Strategy will be generated here -->
+                    <!-- Strategy will be generated here by JavaScript -->
                 </div>
             </div>
         </div>
@@ -614,10 +665,10 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="https://tinyurl.com/YETI-TRDAE" target="_blank">Proof of Trading Ledger</a></li>
                         <li><a href="#strategy">Trading Strategy</a></li>
                         <li><a href="#calculator">Money Management</a></li>
                         <li><a href="#principles">Core Principles</a></li>
+                        <li><a href="https://tinyurl.com/YETI-TRDAE" target="_blank">Proof of Trading Ledger</a></li>
                     </ul>
                 </div>
                 
@@ -626,13 +677,17 @@
                     <ul>
                         <li><a href="https://t.me/+m5hZW5BFx5E1NTU1" target="_blank">Join Trading Channel</a></li>
                         <li><a href="https://broker-qx.pro/sign-up/?lid=1495461" target="_blank">Create Quotex Account</a></li>
+                        <li><a href="#">Deposit & Withdrawal Guide</a></li>
+                        <li><a href="#">Trading Bible PDF</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Contact</h3>
                     <ul>
-                        <li><a href="https://t.me/planearn001" target="_blank">< @PlanEarn001></a></li>
+                        <li><i class="fas fa-envelope"></i> support@yetitrade.com</li>
+                        <li><i class="fab fa-telegram"></i> @PlanEarn001</li>
+                        <li><i class="fas fa-globe"></i> www.yetitrade.com</li>
                     </ul>
                 </div>
             </div>
@@ -644,220 +699,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const capitalInput = document.getElementById('capital');
-            const presetButtons = document.querySelectorAll('.preset-btn');
-            const strategyDisplay = document.getElementById('strategy-display');
-            
-            // Set default strategy
-            generateStrategy(100);
-            
-            // Input event
-            capitalInput.addEventListener('input', function() {
-                const amount = parseInt(this.value) || 100;
-                generateStrategy(amount);
-                updateActiveButton(amount);
-            });
-            
-            // Preset button events
-            presetButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const amount = parseInt(this.dataset.amount);
-                    capitalInput.value = amount;
-                    generateStrategy(amount);
-                    updateActiveButton(amount);
-                });
-            });
-            
-            // Update active button
-            function updateActiveButton(amount) {
-                presetButtons.forEach(button => {
-                    if (parseInt(button.dataset.amount) === amount) {
-                        button.classList.add('active');
-                    } else {
-                        button.classList.remove('active');
-                    }
-                });
-            }
-            
-            // Generate strategy based on capital
-            function generateStrategy(capital) {
-                // Calculate risk amounts
-                const lowRiskAmount = capital * 0.10;
-                const highRiskAmount = capital * 0.18;
-                
-                // Calculate trade amounts for low risk
-                const lowRiskSteps = [
-                    Math.round(lowRiskAmount * 0.2),
-                    Math.round(lowRiskAmount * 0.3),
-                    Math.round(lowRiskAmount * 0.5)
-                ];
-                
-                // Calculate trade amounts for high risk
-                const highRiskSteps = [
-                    Math.round(highRiskAmount * 0.11),
-                    Math.round(highRiskAmount * 0.17),
-                    Math.round(highRiskAmount * 0.28),
-                    Math.round(highRiskAmount * 0.44)
-                ];
-                
-                // Daily profit target
-                const dailyProfitMin = Math.round(capital * 0.04);
-                const dailyProfitMax = Math.round(capital * 0.08);
-                
-                // Generate HTML
-                strategyDisplay.innerHTML = `
-                    <div class="market-split">
-                        <h3>🔄 Market Split Logic</h3>
-                        <table class="market-table">
-                            <tr>
-                                <th>Days</th>
-                                <th>Market Nature</th>
-                                <th>Risk %</th>
-                                <th>Risk Amount</th>
-                                <th>Strategy Focus</th>
-                            </tr>
-                            <tr class="risk-low">
-                                <td>Fri–Mon</td>
-                                <td>Manipulated / OTC</td>
-                                <td>10%</td>
-                                <td>$${lowRiskAmount.toFixed(2)}</td>
-                                <td>Mental health, low risk</td>
-                            </tr>
-                            <tr class="risk-high">
-                                <td>Tue–Thu</td>
-                                <td>Pre-planned movement</td>
-                                <td>18%</td>
-                                <td>$${highRiskAmount.toFixed(2)}</td>
-                                <td>Strategic recovery & gain</td>
-                            </tr>
-                        </table>
-                    </div>
-                    
-                    <div class="trade-steps">
-                        <h4><i class="fas fa-brain"></i> Fri–Mon: Mental Safety Mode (10% Risk = $${lowRiskAmount.toFixed(2)})</h4>
-                        <table class="step-table">
-                            <tr>
-                                <th>Trade Step</th>
-                                <th>Trade Amount</th>
-                                <th>Outcome</th>
-                                <th>Next Step</th>
-                            </tr>
-                            <tr>
-                                <td>1st Trade</td>
-                                <td>$${lowRiskSteps[0]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Continue trading with $${lowRiskSteps[0]}<br>
-                                    Move to $${lowRiskSteps[1]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2nd Trade</td>
-                                <td>$${lowRiskSteps[1]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Recover + profit<br>
-                                    Move to $${lowRiskSteps[2]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3rd Trade</td>
-                                <td>$${lowRiskSteps[2]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Recover + profit<br>
-                                    <strong>STOP</strong> – SL hit at $${lowRiskAmount.toFixed(2)}
-                                </td>
-                            </tr>
-                        </table>
-                        <p class="note"><strong>Note:</strong> No compounding. No emotional chasing. Mental reset is part of the strategy.</p>
-                    </div>
-                    
-                    <div class="trade-steps">
-                        <h4><i class="fas fa-chart-line"></i> Tue–Thu: Strategic Mode (18% Risk = $${highRiskAmount.toFixed(2)})</h4>
-                        <table class="step-table">
-                            <tr>
-                                <th>Trade Step</th>
-                                <th>Trade Amount</th>
-                                <th>Outcome</th>
-                                <th>Next Step</th>
-                            </tr>
-                            <tr>
-                                <td>1st Trade</td>
-                                <td>$${highRiskSteps[0]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Continue trading with $${highRiskSteps[0]}<br>
-                                    Move to $${highRiskSteps[1]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2nd Trade</td>
-                                <td>$${highRiskSteps[1]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Recover + profit<br>
-                                    Move to $${highRiskSteps[2]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3rd Trade</td>
-                                <td>$${highRiskSteps[2]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Recover + profit<br>
-                                    Move to $${highRiskSteps[3]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4th Trade</td>
-                                <td>$${highRiskSteps[3]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Back to $${highRiskSteps[1]} trade<br>
-                                    <strong>STOP</strong> – SL hit at $${highRiskAmount.toFixed(2)}
-                                </td>
-                            </tr>
-                        </table>
-                        <p class="note"><strong>Note:</strong> Recovery logic is built-in. No emotional compounding. Focus on structure.</p>
-                    </div>
-                    
-                    <div class="philosophy">
-                        <h4>🎯 Daily Goal & Trading Philosophy</h4>
-                        <ul>
-                            <li><strong>✅ Target only ${dailyProfitMin}-${dailyProfitMax}% profit per day</strong> ($${dailyProfitMin}-$${dailyProfitMax})</li>
-                            <li><strong>🚫 No overtrading</strong> – fewer, smarter trades</li>
-                            <li><strong>🔒 No compounding or doubling promises</strong></li>
-                            <li><strong>🙏 If you join Yetitrade expecting to double your money quickly, I'm sorry—this isn't the place for that.</strong></li>
-                            <li><strong>🧠 We trade with discipline, not dreams.</strong></li>
-                        </ul>
-                    </div>
-                `;
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
