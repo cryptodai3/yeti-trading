@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="loss-outcome">❌ Loss</span>
                         </td>
                         <td>
-                            Recover + profit<br>
+                            Back to 1st Trade Balance<br>
                             Move to $${lowRiskSteps[2]} trade
                         </td>
                     </tr>
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="loss-outcome">❌ Loss</span>
                         </td>
                         <td>
-                            Recover + profit<br>
+                            Back to 2nd Trade Balance<br>
                             <strong>STOP</strong> – SL hit at $${lowRiskAmount.toFixed(2)}
                         </td>
                     </tr>
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="loss-outcome">❌ Loss</span>
                         </td>
                         <td>
-                            Recover + profit<br>
+                            Back to 1st Trade Balanc<br>
                             Move to $${highRiskSteps[2]} trade
                         </td>
                     </tr>
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="loss-outcome">❌ Loss</span>
                         </td>
                         <td>
-                            Recover + profit<br>
+                            Back to 2nd Trade Balanc<br>
                             Move to $${highRiskSteps[3]} trade
                         </td>
                     </tr>
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span class="loss-outcome">❌ Loss</span>
                         </td>
                         <td>
-                            Back to $${highRiskSteps[1]} trade<br>
+                            Back to 3rd Trade Balanc<br>
                             <strong>STOP</strong> – SL hit at $${highRiskAmount.toFixed(2)}
                         </td>
                     </tr>
