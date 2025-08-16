@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YetiTrade - Binary Trading Strategy</title>
+    <title>YetiTrade - Updated Trading Strategy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a365d;
@@ -24,13 +24,15 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Roboto', sans-serif;
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #2d3748;
+            background: linear-gradient(135deg, #0f1a2f, #1a365d);
+            color: #e2e8f0;
             line-height: 1.6;
+            background-attachment: fixed;
+            background-size: cover;
         }
         
         .container {
@@ -42,13 +44,14 @@
         
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: rgba(10, 25, 47, 0.95);
             color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border-bottom: 2px solid var(--accent);
         }
         
         .header-content {
@@ -60,44 +63,54 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .logo i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--accent);
+            background: rgba(237, 137, 54, 0.1);
+            padding: 8px;
+            border-radius: 10px;
         }
         
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 700;
+            background: linear-gradient(to right, #ed8936, #ffd166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
         
         .nav-links a {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 6px;
         }
         
         .nav-links a:hover {
             color: white;
+            background: rgba(237, 137, 54, 0.15);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), 
-                        url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0;
             text-align: center;
+            border-bottom: 1px solid rgba(237, 137, 54, 0.3);
         }
         
         .hero-content {
@@ -106,188 +119,258 @@
         }
         
         .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
             font-weight: 700;
+            background: linear-gradient(to right, #ed8936, #ffd166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            margin-bottom: 2.2rem;
             opacity: 0.9;
+            line-height: 1.8;
         }
         
         .warning-box {
-            background-color: rgba(237, 137, 54, 0.2);
+            background: rgba(237, 137, 54, 0.15);
             border-left: 4px solid var(--accent);
-            padding: 1.5rem;
-            margin: 2rem 0;
+            padding: 1.8rem;
+            margin: 2.5rem 0;
             border-radius: 0 8px 8px 0;
             text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Core Principles */
         .section {
-            padding: 4rem 0;
+            padding: 5rem 0;
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
         
         .section-title h2 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
         }
         
         .section-title p {
-            color: var(--gray);
+            color: var(--light-gray);
             max-width: 700px;
-            margin: 0 auto;
+            margin: 1.5rem auto 0;
+            font-size: 1.1rem;
         }
         
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
         
         .principle-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
+            background: rgba(26, 38, 58, 0.7);
+            border-radius: 15px;
+            padding: 2.2rem;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(237, 137, 54, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .principle-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(237, 137, 54, 0.4);
         }
         
         .principle-card i {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            font-size: 3.2rem;
+            margin-bottom: 1.8rem;
             color: var(--accent);
+            background: rgba(237, 137, 54, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            text-align: center;
         }
         
         .principle-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: #f8fafc;
+        }
+        
+        .principle-card p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
         }
         
         /* Capital Calculator */
         .calculator {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            max-width: 800px;
+            background: rgba(26, 38, 58, 0.8);
+            border-radius: 15px;
+            padding: 2.8rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
             margin: 0 auto;
+            border: 1px solid rgba(237, 137, 54, 0.2);
         }
         
         .calculator-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         
         .calculator-header h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        
+        .calculator-header p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
         }
         
         .input-group {
             display: flex;
             flex-direction: column;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .input-group label {
             font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
+            margin-bottom: 1rem;
+            color: #f8fafc;
+            font-size: 1.15rem;
         }
         
         .capital-input {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         
         .capital-input input {
             flex: 1;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 1.1rem;
-            transition: border-color 0.3s;
+            padding: 1rem 1.2rem;
+            border: 2px solid rgba(237, 137, 54, 0.3);
+            border-radius: 10px;
+            font-size: 1.15rem;
+            transition: all 0.3s;
+            background: rgba(15, 23, 42, 0.6);
+            color: white;
+            min-width: 200px;
         }
         
         .capital-input input:focus {
             outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.3);
         }
         
         .preset-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 2rem;
+            gap: 12px;
+            margin-bottom: 2.5rem;
         }
         
         .preset-btn {
-            background-color: var(--light-gray);
-            border: none;
-            padding: 0.6rem 1.2rem;
+            background: rgba(237, 137, 54, 0.15);
+            border: 1px solid rgba(237, 137, 54, 0.3);
+            padding: 0.8rem 1.5rem;
             border-radius: 30px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            color: #f8fafc;
+            font-size: 1rem;
         }
         
         .preset-btn:hover {
-            background-color: var(--accent);
-            color: white;
+            background: rgba(237, 137, 54, 0.3);
+            transform: translateY(-2px);
         }
         
         .preset-btn.active {
-            background-color: var(--accent);
+            background: var(--accent);
             color: white;
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(237, 137, 54, 0.3);
         }
         
         /* Strategy Display */
         .strategy-display {
-            margin-top: 3rem;
+            margin-top: 3.5rem;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(237, 137, 54, 0.2);
         }
         
         .market-split {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .market-split h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .market-split h3 i {
+            color: var(--accent);
         }
         
         .market-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            background-color: white;
-            border-radius: 8px;
+            margin: 1.8rem 0;
+            background: rgba(26, 38, 58, 0.6);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .market-table th {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem;
+            background: rgba(237, 137, 54, 0.7);
+            color: #1a202c;
+            padding: 1.2rem;
             text-align: left;
+            font-weight: 600;
         }
         
         .market-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--light-gray);
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
         }
         
         .market-table tr:last-child td {
@@ -295,50 +378,58 @@
         }
         
         .risk-low {
-            background-color: rgba(72, 187, 120, 0.1);
+            background: rgba(72, 187, 120, 0.1);
         }
         
         .risk-high {
-            background-color: rgba(237, 137, 54, 0.1);
+            background: rgba(237, 137, 54, 0.1);
         }
         
         .trade-steps {
-            margin-top: 2rem;
+            margin-top: 2.8rem;
         }
         
         .trade-steps h4 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .trade-steps h4 i {
             color: var(--accent);
+            background: rgba(237, 137, 54, 0.1);
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
         }
         
         .step-table {
             width: 100%;
             border-collapse: collapse;
-            background-color: white;
-            border-radius: 8px;
+            background: rgba(26, 38, 58, 0.6);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .step-table th {
-            background-color: var(--secondary);
+            background: rgba(44, 82, 130, 0.8);
             color: white;
-            padding: 0.8rem;
+            padding: 1.1rem;
             text-align: center;
+            font-weight: 500;
         }
         
         .step-table td {
-            padding: 0.8rem;
+            padding: 1.1rem;
             text-align: center;
-            border-bottom: 1px solid var(--light-gray);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
         }
         
         .step-table tr:last-child td {
@@ -348,103 +439,151 @@
         .win-outcome {
             color: var(--success);
             font-weight: 600;
+            font-size: 1.1rem;
         }
         
         .loss-outcome {
             color: var(--danger);
             font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .strategy-note {
+            background: rgba(237, 137, 54, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 1rem;
         }
         
         .philosophy {
-            background-color: var(--light);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            background: rgba(26, 38, 58, 0.7);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(237, 137, 54, 0.2);
         }
         
         .philosophy h4 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            text-align: center;
         }
         
         .philosophy ul {
-            padding-left: 1.5rem;
+            padding-left: 1.8rem;
+            list-style: none;
         }
         
         .philosophy li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .philosophy li:before {
+            content: '•';
+            color: var(--accent);
+            font-size: 1.8rem;
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
         }
         
         /* Resources Section */
         .resources {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
         
         .resource-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background: rgba(26, 38, 58, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(237, 137, 54, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .resource-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(237, 137, 54, 0.4);
         }
         
         .resource-card i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(237, 137, 54, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
         }
         
         .resource-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: #f8fafc;
         }
         
-        .resource-card .btn {
+        .resource-card p {
+            color: #cbd5e1;
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .btn {
             display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 6px;
+            background: var(--accent);
+            color: #1a202c;
+            padding: 0.9rem 1.8rem;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 500;
-            margin-top: 1rem;
+            font-weight: 600;
             transition: all 0.3s;
+            border: 2px solid var(--accent);
+            font-size: 1.05rem;
         }
         
-        .resource-card .btn:hover {
-            background-color: var(--secondary);
-            transform: scale(1.05);
+        .btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(237, 137, 54, 0.3);
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark);
+            background: rgba(10, 15, 30, 0.95);
             color: white;
-            padding: 3rem 0 2rem;
+            padding: 4rem 0 2.5rem;
+            border-top: 1px solid rgba(237, 137, 54, 0.3);
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 2.8rem;
+            margin-bottom: 3rem;
         }
         
         .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.8rem;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.8rem;
+            color: var(--accent);
         }
         
         .footer-column h3::after {
@@ -452,17 +591,33 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .footer-column p, .footer-column li {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
         }
         
         .footer-column ul {
             list-style: none;
+            padding-left: 0;
         }
         
         .footer-column ul li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .footer-column ul li i {
+            color: var(--accent);
+            min-width: 25px;
         }
         
         .footer-column ul li a {
@@ -472,38 +627,41 @@
         }
         
         .footer-column ul li a:hover {
-            color: white;
+            color: var(--accent);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 2.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
             
             .nav-links {
+                width: 100%;
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             .hero h2 {
-                font-size: 2rem;
+                font-size: 2.3rem;
             }
             
             .hero p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .calculator {
-                padding: 1.5rem;
+                padding: 2rem;
             }
             
             .capital-input {
@@ -512,6 +670,32 @@
             
             .preset-buttons {
                 justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3.5rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 3.5rem 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resources {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -529,6 +713,7 @@
                     <a href="#strategy">Strategy</a>
                     <a href="#calculator">Calculator</a>
                     <a href="#principles">Principles</a>
+                    <a href="#resources">Resources</a>
                     <a href="#contact">Contact</a>
                 </div>
             </div>
@@ -539,11 +724,11 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>🧠 Before You Copy My Quotex Trades – MUST READ</h2>
-                <p>If you're serious about binary trading and planning to follow my signals on Quotex, this is YOUR TRADING BIBLE.</p>
+                <h2>🧠 Enhanced Quotex Trading Strategy</h2>
+                <p>Backed by our team's extensive testing and refined for optimal performance, this updated strategy focuses on disciplined trading with improved recovery logic.</p>
                 
                 <div class="warning-box">
-                    <p>Read it fully. Follow step-by-step. This will help you grow slow, steady, and safely.</p>
+                    <p>Our target is 2 winning trades per day. If market conditions are exceptionally favorable, we may consider a 3rd trade. But 2 wins remains our primary daily target.</p>
                 </div>
                 
                 <p>We trade with discipline, not dreams.</p>
@@ -555,50 +740,44 @@
     <section id="principles" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Core Trading Principles</h2>
-                <p>The foundation of our disciplined trading approach</p>
+                <h2>Updated Trading Principles</h2>
+                <p>Refined through extensive backtesting and real market experience</p>
             </div>
             
             <div class="principles-grid">
                 <div class="principle-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Time Format</h3>
-                    <p>I trade using Indian Time Zone (IST) ⏰ (UTC +5:30). ALWAYS follow the real clock time — not the Quotex countdown timer.</p>
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Enhanced Recovery Logic</h3>
+                    <p>After recovering from a loss with a win, we maintain the current trade amount for the next trade before returning to the initial amount.</p>
                 </div>
                 
                 <div class="principle-card">
-                    <i class="fas fa-signal"></i>
-                    <h3>Signal Frequency</h3>
-                    <p>I don't chase number of trades. Goal = Daily profit target 5–10% (depends on market conditions).</p>
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Risk Management</h3>
+                    <p>Different risk profiles for different market days (10% Fri-Mon, 18% Tue-Thu) to optimize for market conditions.</p>
                 </div>
                 
                 <div class="principle-card">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <h3>Money Management</h3>
-                    <p>Our exclusive money management blueprint adapts to your capital size and market conditions.</p>
-                </div>
-                
-                <div class="principle-card">
-                    <i class="fas fa-brain"></i>
+                    <i class="fas fa-shield-alt"></i>
                     <h3>Mental Safety</h3>
-                    <p>Built-in recovery logic. No compounding. No emotional chasing. Mental reset is part of the strategy.</p>
+                    <p>Built-in recovery system with stop-loss discipline. No emotional trading decisions.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Strategy Calculator -->
-    <section id="calculator" class="section" style="background-color: #edf2f7;">
+    <section id="calculator" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>Money Management Blueprint</h2>
+                <h2>Enhanced Money Management</h2>
                 <p>Enter your account balance to generate your personalized trading strategy</p>
             </div>
             
             <div class="calculator">
                 <div class="calculator-header">
-                    <h3>💼 Yetitrade Exclusive Money Management System</h3>
-                    <p>Customized for your account size</p>
+                    <h3>💼 Enhanced Money Management System</h3>
+                    <p>Updated strategy with improved recovery logic and 2-win daily target</p>
                 </div>
                 
                 <div class="input-group">
@@ -621,16 +800,16 @@
     </section>
 
     <!-- Resources Section -->
-    <section class="section">
+    <section id="resources" class="section">
         <div class="container">
             <div class="section-title">
                 <h2>Essential Trading Resources</h2>
-                <p>Tools and information to help you succeed</p>
+                <p>Tools and information to help you succeed with our strategy</p>
             </div>
             
             <div class="resources">
                 <div class="resource-card">
-                    <i class="fas fa-history"></i>
+                    <i class="fas fa-book"></i>
                     <h3>Trading Ledger</h3>
                     <p>Check our trade history for proof of strategy performance</p>
                     <a href="https://tinyurl.com/YETI-TRDAE" class="btn" target="_blank">View Trading Ledger</a>
@@ -638,9 +817,9 @@
                 
                 <div class="resource-card">
                     <i class="fas fa-users"></i>
-                    <h3>Join Our Community</h3>
-                    <p>Get daily signals and connect with other traders</p>
-                    <a href="https://t.me/+m5hZW5BFx5E1NTU1" class="btn" target="_blank">Join Telegram Channel</a>
+                    <h3>Trading Community</h3>
+                    <p>Join our exclusive Telegram community for daily signals, market analysis, and strategy discussions.</p>
+                    <a href="https://t.me/+m5hZW5BFx5E1NTU1" class="btn" target="_blank">Join Community</a>
                 </div>
                 
                 <div class="resource-card">
@@ -659,31 +838,33 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>YetiTrade</h3>
-                    <p>Disciplined trading strategies for consistent growth. We focus on risk management and psychological safety in trading.</p>
+                    <p>Disciplined trading strategies for consistent growth. Our enhanced strategy focuses on risk management and psychological safety in trading.</p>
+                    <p><i class="fas fa-star"></i> Updated strategy backed by extensive testing</p>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="https://tinyurl.com/YETI-TRDAE" target="_blank">Proof of Trading Ledger</a></li>
                         <li><a href="#strategy">Trading Strategy</a></li>
                         <li><a href="#calculator">Money Management</a></li>
                         <li><a href="#principles">Core Principles</a></li>
+                        <li><a href="#resources">Learning Resources</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Important Resources</h3>
                     <ul>
-                        <li><a href="https://t.me/+m5hZW5BFx5E1NTU1" target="_blank">Join Trading Channel</a></li>
-                        <li><a href="https://broker-qx.pro/sign-up/?lid=1495461" target="_blank">Create Quotex Account</a></li>
+                        <li><i class="fab fa-telegram"></i> <a href="https://t.me/+m5hZW5BFx5E1NTU1" target="_blank">Join Trading Channel</a></li>
+                        <li><i class="fab fa-wallet"></i> <a href="https://broker-qx.pro/sign-up/?lid=1495461" target="_blank">Create Quotex Account</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Contact</h3>
+                    <h3>Contact & Support</h3>
                     <ul>
-                        <li><a href="https://t.me/planearn001" target="_blank">< @PlanEarn001></a></li>
+                        <li><i class="fab fa-telegram"></i> <a href="https://t.me/planearn001" target="_blank">@planearn001</a></li>
+                        <li><i class="fas fa-whatsapp"></i> +9779707162734</li>
                     </ul>
                 </div>
             </div>
@@ -695,6 +876,224 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const capitalInput = document.getElementById('capital');
+            const presetButtons = document.querySelectorAll('.preset-btn');
+            const strategyDisplay = document.getElementById('strategy-display');
+            
+            // Set default strategy
+            generateStrategy(100);
+            
+            // Input event
+            capitalInput.addEventListener('input', function() {
+                const amount = parseInt(this.value) || 100;
+                generateStrategy(amount);
+                updateActiveButton(amount);
+            });
+            
+            // Preset button events
+            presetButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const amount = parseInt(this.dataset.amount);
+                    capitalInput.value = amount;
+                    generateStrategy(amount);
+                    updateActiveButton(amount);
+                });
+            });
+            
+            // Update active button
+            function updateActiveButton(amount) {
+                presetButtons.forEach(button => {
+                    if (parseInt(button.dataset.amount) === amount) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Generate strategy based on capital
+            function generateStrategy(capital) {
+                // Calculate risk amounts
+                const lowRiskAmount = capital * 0.10;
+                const highRiskAmount = capital * 0.20;
+                
+                // Calculate trade amounts for low risk
+                const lowRiskSteps = [
+                    Math.round(lowRiskAmount * 0.2),
+                    Math.round(lowRiskAmount * 0.3),
+                    Math.round(lowRiskAmount * 0.5)
+                ];
+                
+                // Calculate trade amounts for high risk
+                const highRiskSteps = [
+                    Math.round(highRiskAmount * 0.1),
+                    Math.round(highRiskAmount * 0.2),
+                    Math.round(highRiskAmount * 0.45),
+                    Math.round(highRiskAmount * 0.25)
+                ];
+                
+                // Daily profit target
+                const dailyProfitMin = Math.round(capital * 0.04);
+                const dailyProfitMax = Math.round(capital * 0.08);
+                
+                // Generate HTML
+                strategyDisplay.innerHTML = `
+                    <div class="market-split">
+                        <h3><i class="fas fa-sync-alt"></i> Market Split Logic</h3>
+                        <table class="market-table">
+                            <tr>
+                                <th>Days</th>
+                                <th>Market Nature</th>
+                                <th>Risk %</th>
+                                <th>Risk Amount</th>
+                                <th>Strategy Focus</th>
+                            </tr>
+                            <tr class="risk-low">
+                                <td>Fri–Mon</td>
+                                <td>Manipulated / OTC</td>
+                                <td>10%</td>
+                                <td>$${lowRiskAmount.toFixed(2)}</td>
+                                <td>Mental health, low risk</td>
+                            </tr>
+                            <tr class="risk-high">
+                                <td>Tue–Thu</td>
+                                <td>Pre-planned movement</td>
+                                <td>20%</td>
+                                <td>$${highRiskAmount.toFixed(2)}</td>
+                                <td>Strategic recovery & gain</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="trade-steps">
+                        <h4><i class="fas fa-brain"></i> Fri–Mon: Mental Safety Mode (10% Risk = $${lowRiskAmount.toFixed(2)})</h4>
+                        <table class="step-table">
+                            <tr>
+                                <th>Trade Step</th>
+                                <th>Trade Amount</th>
+                                <th>Outcome</th>
+                                <th>Next Step</th>
+                            </tr>
+                            <tr>
+                                <td>1st Trade</td>
+                                <td>$${lowRiskSteps[0]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Continue trading with $${lowRiskSteps[0]}<br>
+                                    Move to $${lowRiskSteps[1]} trade
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2nd Trade</td>
+                                <td>$${lowRiskSteps[1]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Back to 1st Trade Balance<br>
+                                    Move to $${lowRiskSteps[2]} trade
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3rd Trade</td>
+                                <td>$${lowRiskSteps[2]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Back to 2nd Trade Balance<br>
+                                    <strong>STOP</strong> – SL hit at $${lowRiskAmount.toFixed(2)}
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="strategy-note">
+                            <strong>Note:</strong> After recovering from a loss with a win (Trade 2), we HOLD the same amount for the next trade before returning to the initial amount. This enhances our recovery potential while maintaining discipline.
+                        </div>
+                    </div>
+                    
+                    <div class="trade-steps">
+                        <h4><i class="fas fa-chart-line"></i> Tue–Thu: Strategic Mode (20% Risk = $${highRiskAmount.toFixed(2)})</h4>
+                        <table class="step-table">
+                            <tr>
+                                <th>Trade Step</th>
+                                <th>Trade Amount</th>
+                                <th>Outcome</th>
+                                <th>Next Step</th>
+                            </tr>
+                            <tr>
+                                <td>1st Trade</td>
+                                <td>$${highRiskSteps[0]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Continue trading with $${highRiskSteps[0]}<br>
+                                    Move to $${highRiskSteps[1]} trade
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2nd Trade</td>
+                                <td>$${highRiskSteps[1]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Back to 1st Trade Balance<br>
+                                    Move to $${highRiskSteps[2]} trade
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3rd Trade</td>
+                                <td>$${highRiskSteps[2]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Back to 2nd Trade Balance<br>
+                                    Move to $${highRiskSteps[3]} trade
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4th Trade</td>
+                                <td>$${highRiskSteps[3]}</td>
+                                <td>
+                                    <span class="win-outcome">✅ Win</span><br>
+                                    <span class="loss-outcome">❌ Loss</span>
+                                </td>
+                                <td>
+                                    Back to 3rd Trade Balance<br>
+                                    <strong>STOP</strong> – SL hit at $${highRiskAmount.toFixed(2)}
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="strategy-note">
+                            <strong>Note:</strong> Enhanced recovery logic - After a win following a loss, we HOLD the same amount for the next trade to maximize recovery potential before returning to the initial trade amount.
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy">
+                        <h4>🎯 Daily Goal & Trading Philosophy</h4>
+                        <ul>
+                            <li><strong>✅ Target 2 winning trades per day</strong> ($${dailyProfitMin}-$${dailyProfitMax}) - only consider a 3rd trade in exceptionally favorable market conditions</li>
+                            <li><strong>🔄 Enhanced recovery logic</strong> - After recovering from a loss with a win, we hold the same amount for the next trade</li>
+                            <li><strong>🚫 No overtrading</strong> – fewer, smarter trades with strict discipline</li>
+                            <li><strong>🔒 No compounding or doubling promises</strong> - structured risk management</li>
+                            <li><strong>🧠 We trade with discipline, not dreams - backed by extensive testing</strong></li>
+                        </ul>
+                    </div>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
