@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YetiTrade - Updated Trading Strategy</title>
+    <title>YetiTrade Risk Management Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/7N0t6N0J/Copilot-20250713-132321.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/7N0t6N0J/Copilot-20250713-132321.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/7N0t6N0J/Copilot-20250713-132321.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <style>
         :root {
             --primary: #1a365d;
             --secondary: #2c5282;
             --accent: #ed8936;
-            --light: #f7fafc;
-            --dark: #1a202c;
             --success: #48bb78;
             --danger: #e53e3e;
-            --warning: #ecc94b;
+            --light: #f7fafc;
+            --dark: #1a202c;
             --gray: #718096;
             --light-gray: #e2e8f0;
+            --trading-bg: #0f1a2f;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', 'Roboto', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #0f1a2f, #1a365d);
+            background: linear-gradient(135deg, var(--trading-bg), var(--primary));
             color: #e2e8f0;
             line-height: 1.6;
+            min-height: 100vh;
             background-attachment: fixed;
-            background-size: cover;
         }
         
         .container {
@@ -46,7 +53,7 @@
         header {
             background: rgba(10, 25, 47, 0.95);
             color: white;
-            padding: 1.2rem 0;
+            padding: 0.8rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -66,12 +73,10 @@
             gap: 12px;
         }
         
-        .logo i {
-            font-size: 2.2rem;
-            color: var(--accent);
-            background: rgba(237, 137, 54, 0.1);
-            padding: 8px;
-            border-radius: 10px;
+        .logo img {
+            height: 50px;
+            width: auto;
+            border-radius: 8px;
         }
         
         .logo h1 {
@@ -82,25 +87,6 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-        
-        .nav-links a:hover {
-            color: white;
-            background: rgba(237, 137, 54, 0.15);
-        }
-        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)), 
@@ -108,7 +94,7 @@
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 5rem 0;
+            padding: 4rem 0;
             text-align: center;
             border-bottom: 1px solid rgba(237, 137, 54, 0.3);
         }
@@ -119,7 +105,7 @@
         }
         
         .hero h2 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 1.2rem;
             font-weight: 700;
             background: linear-gradient(to right, #ed8936, #ffd166);
@@ -129,9 +115,29 @@
         
         .hero p {
             font-size: 1.25rem;
-            margin-bottom: 2.2rem;
+            margin-bottom: 1.5rem;
             opacity: 0.9;
             line-height: 1.8;
+        }
+        
+        .target-box {
+            background: rgba(72, 187, 120, 0.15);
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .target-box p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .target-box i {
+            color: var(--success);
+            margin-right: 10px;
         }
         
         .warning-box {
@@ -144,98 +150,59 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        /* Core Principles */
-        .section {
-            padding: 5rem 0;
-            background: rgba(15, 23, 42, 0.7);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .section-title {
+        .motivation-box {
+            background: rgba(26, 54, 93, 0.6);
+            border-radius: 12px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(237, 137, 54, 0.3);
             text-align: center;
-            margin-bottom: 3.5rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 0.8rem;
             position: relative;
-            display: inline-block;
+            overflow: hidden;
         }
         
-        .section-title h2:after {
-            content: '';
+        .motivation-box:before {
+            content: "";
             position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), #ffd166);
         }
         
-        .section-title p {
-            color: var(--light-gray);
-            max-width: 700px;
-            margin: 1.5rem auto 0;
-            font-size: 1.1rem;
-        }
-        
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-        
-        .principle-card {
-            background: rgba(26, 38, 58, 0.7);
-            border-radius: 15px;
-            padding: 2.2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(237, 137, 54, 0.2);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .principle-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(237, 137, 54, 0.4);
-        }
-        
-        .principle-card i {
-            font-size: 3.2rem;
-            margin-bottom: 1.8rem;
-            color: var(--accent);
-            background: rgba(237, 137, 54, 0.1);
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-radius: 50%;
-            text-align: center;
-        }
-        
-        .principle-card h3 {
+        .motivation-box h3 {
             font-size: 1.5rem;
-            margin-bottom: 1.2rem;
-            color: #f8fafc;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
         }
         
-        .principle-card p {
-            color: #cbd5e1;
-            font-size: 1.05rem;
+        .motivation-content {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.8;
+            padding: 0 1rem;
         }
         
-        /* Capital Calculator */
+        .motivation-content .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .motivation-author {
+            margin-top: 1.5rem;
+            font-style: italic;
+            color: #a0aec0;
+        }
+        
+        /* Calculator Section */
         .calculator {
             background: rgba(26, 38, 58, 0.8);
             border-radius: 15px;
             padding: 2.8rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             max-width: 900px;
-            margin: 0 auto;
+            margin: 3rem auto;
             border: 1px solid rgba(237, 137, 54, 0.2);
         }
         
@@ -258,14 +225,17 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         .input-group label {
             font-weight: 500;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             color: #f8fafc;
             font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .capital-input {
@@ -323,82 +293,103 @@
             box-shadow: 0 5px 15px rgba(237, 137, 54, 0.3);
         }
         
-        /* Strategy Display */
-        .strategy-display {
-            margin-top: 3.5rem;
+        /* Day Selection */
+        .day-selection {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .day-btn {
+            background: rgba(26, 38, 58, 0.7);
+            border: 1px solid rgba(237, 137, 54, 0.2);
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .day-btn:hover {
+            background: rgba(237, 137, 54, 0.2);
+        }
+        
+        .day-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 3px 10px rgba(237, 137, 54, 0.3);
+        }
+        
+        .day-btn .day-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* Risk Results */
+        .risk-results {
+            margin-top: 3rem;
             background: rgba(15, 23, 42, 0.4);
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid rgba(237, 137, 54, 0.2);
         }
         
-        .market-split {
+        .day-risk-summary {
+            text-align: center;
             margin-bottom: 2.5rem;
-        }
-        
-        .market-split h3 {
-            font-size: 1.7rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .market-split h3 i {
-            color: var(--accent);
-        }
-        
-        .market-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.8rem 0;
+            padding: 1.5rem;
             background: rgba(26, 38, 58, 0.6);
             border-radius: 10px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .market-table th {
-            background: rgba(237, 137, 54, 0.7);
-            color: #1a202c;
-            padding: 1.2rem;
-            text-align: left;
-            font-weight: 600;
+        .day-risk-summary:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), #ffd166);
         }
         
-        .market-table td {
-            padding: 1.2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #e2e8f0;
-        }
-        
-        .market-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .risk-low {
-            background: rgba(72, 187, 120, 0.1);
-        }
-        
-        .risk-high {
-            background: rgba(237, 137, 54, 0.1);
-        }
-        
-        .trade-steps {
-            margin-top: 2.8rem;
-        }
-        
-        .trade-steps h4 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
+        .day-risk-summary h3 {
+            font-size: 1.5rem;
             color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .day-risk-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+        
+        .session-box {
+            background: rgba(26, 38, 58, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(237, 137, 54, 0.2);
+        }
+        
+        .session-header {
             display: flex;
             align-items: center;
             gap: 12px;
+            margin-bottom: 1.5rem;
         }
         
-        .trade-steps h4 i {
+        .session-header i {
+            font-size: 1.8rem;
             color: var(--accent);
             background: rgba(237, 137, 54, 0.1);
             width: 50px;
@@ -408,179 +399,156 @@
             border-radius: 50%;
         }
         
-        .step-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: rgba(26, 38, 58, 0.6);
+        .session-header h4 {
+            font-size: 1.5rem;
+            color: #f8fafc;
+        }
+        
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .risk-card {
+            background: rgba(15, 23, 42, 0.6);
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .step-table th {
-            background: rgba(44, 82, 130, 0.8);
-            color: white;
-            padding: 1.1rem;
+            padding: 1.2rem;
             text-align: center;
-            font-weight: 500;
+            border: 1px solid rgba(237, 137, 54, 0.2);
+            transition: transform 0.3s;
         }
         
-        .step-table td {
-            padding: 1.1rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #e2e8f0;
+        .risk-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
         
-        .step-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .win-outcome {
-            color: var(--success);
-            font-weight: 600;
+        .risk-card h5 {
             font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
         
-        .loss-outcome {
-            color: var(--danger);
-            font-weight: 600;
-            font-size: 1.1rem;
+        .risk-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f8fafc;
         }
         
-        .strategy-note {
+        .risk-percent {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-top: 0.5rem;
+        }
+        
+        .restriction-note {
             background: rgba(237, 137, 54, 0.1);
             border-left: 4px solid var(--accent);
-            padding: 1.2rem;
-            margin-top: 1.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
             border-radius: 0 8px 8px 0;
-            font-size: 1rem;
-        }
-        
-        .philosophy {
-            background: rgba(26, 38, 58, 0.7);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-top: 3rem;
-            border: 1px solid rgba(237, 137, 54, 0.2);
-        }
-        
-        .philosophy h4 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-            text-align: center;
-        }
-        
-        .philosophy ul {
-            padding-left: 1.8rem;
-            list-style: none;
-        }
-        
-        .philosophy li {
-            margin-bottom: 1.2rem;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-        
-        .philosophy li:before {
-            content: '•';
-            color: var(--accent);
-            font-size: 1.8rem;
-            position: absolute;
-            left: 0;
-            top: -0.5rem;
+            font-size: 0.95rem;
         }
         
         /* Resources Section */
         .resources {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            gap: 25px;
             margin-top: 3rem;
         }
         
         .resource-card {
-            background: rgba(26, 38, 58, 0.7);
+            background: rgba(26, 38, 58, 0.8);
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.3s;
             border: 1px solid rgba(237, 137, 54, 0.2);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .resource-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-            border-color: rgba(237, 137, 54, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
         }
         
         .resource-card i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--accent);
             margin-bottom: 1.5rem;
-            background: rgba(237, 137, 54, 0.1);
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
         }
         
         .resource-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             color: #f8fafc;
         }
         
         .resource-card p {
             color: #cbd5e1;
-            margin-bottom: 1.8rem;
-            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
             line-height: 1.7;
         }
         
         .btn {
             display: inline-block;
             background: var(--accent);
-            color: #1a202c;
-            padding: 0.9rem 1.8rem;
+            color: white;
+            padding: 0.8rem 1.8rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
             border: 2px solid var(--accent);
-            font-size: 1.05rem;
         }
         
         .btn:hover {
             background: transparent;
             color: var(--accent);
             transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(237, 137, 54, 0.3);
+            box-shadow: 0 5px 15px rgba(237, 137, 54, 0.3);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+            font-weight: 700;
+        }
+        
+        .section-title p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         /* Footer */
         footer {
             background: rgba(10, 15, 30, 0.95);
             color: white;
-            padding: 4rem 0 2.5rem;
+            padding: 3rem 0 2rem;
             border-top: 1px solid rgba(237, 137, 54, 0.3);
+            margin-top: 4rem;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.8rem;
-            margin-bottom: 3rem;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
         }
         
         .footer-column h3 {
             font-size: 1.5rem;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.8rem;
             color: var(--accent);
@@ -641,27 +609,26 @@
         
         /* Responsive */
         @media (max-width: 992px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
             .hero h2 {
                 font-size: 2.3rem;
             }
             
-            .hero p {
-                font-size: 1.1rem;
+            .day-selection {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
             }
             
             .calculator {
-                padding: 2rem;
+                padding: 1.5rem;
             }
             
             .capital-input {
@@ -671,32 +638,42 @@
             .preset-buttons {
                 justify-content: center;
             }
+            
+            .day-selection {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
-        @media (max-width: 768px) {
-            .hero {
-                padding: 3.5rem 0;
+        @media (max-width: 480px) {
+            .day-selection {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 3.5rem 0;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .principles-grid {
+            .risk-grid {
                 grid-template-columns: 1fr;
             }
             
-            .resources {
-                grid-template-columns: 1fr;
+            .logo h1 {
+                font-size: 1.4rem;
             }
+            
+            .motivation-content {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animated-item {
+            opacity: 0;
         }
     </style>
 </head>
@@ -706,15 +683,8 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-brain"></i>
-                    <h1>YetiTrade</h1>
-                </div>
-                <div class="nav-links">
-                    <a href="#strategy">Strategy</a>
-                    <a href="#calculator">Calculator</a>
-                    <a href="#principles">Principles</a>
-                    <a href="#resources">Resources</a>
-                    <a href="#contact">Contact</a>
+                    <img src="https://i.ibb.co/7N0t6N0J/Copilot-20250713-132321.png" alt="YetiTrade Logo">
+                    <h1>YetiTrade Risk Manager</h1>
                 </div>
             </div>
         </div>
@@ -724,77 +694,81 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>🧠 Enhanced Quotex Trading Strategy</h2>
-                <p>Backed by our team's extensive testing and refined for optimal performance, this updated strategy focuses on disciplined trading with improved recovery logic.</p>
+                <h2>Enhanced Risk Management Calculator</h2>
+                <p>Calculate your daily risk amounts based on your account balance and the day of the week</p>
                 
-                <div class="warning-box">
-                    <p>Our target is 2 winning trades per day. If market conditions are exceptionally favorable, we may consider a 3rd trade. But 2 wins remains our primary daily target.</p>
+                <div class="target-box">
+                    <p><i class="fas fa-bullseye"></i> Our target is 2 winning trades per day. If market conditions are exceptionally favorable, we may consider a 3rd trade. But 2 wins remains our primary daily target.</p>
                 </div>
                 
-                <p>We trade with discipline, not dreams.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Core Principles -->
-    <section id="principles" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Updated Trading Principles</h2>
-                <p>Refined through extensive backtesting and real market experience</p>
-            </div>
-            
-            <div class="principles-grid">
-                <div class="principle-card">
-                    <i class="fas fa-sync-alt"></i>
-                    <h3>Enhanced Recovery Logic</h3>
-                    <p>After recovering from a loss with a win, we maintain the current trade amount for the next trade before returning to the initial amount.</p>
-                </div>
-                
-                <div class="principle-card">
-                    <i class="fas fa-balance-scale"></i>
-                    <h3>Risk Management</h3>
-                    <p>Different risk profiles for different market days (10% Fri-Mon, 20% Tue-Thu) to optimize for market conditions.</p>
-                </div>
-                
-                <div class="principle-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Mental Safety</h3>
-                    <p>Built-in recovery system with stop-loss discipline. No emotional trading decisions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Strategy Calculator -->
-    <section id="calculator" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Enhanced Money Management</h2>
-                <p>Enter your account balance to generate your personalized trading strategy</p>
-            </div>
-            
-            <div class="calculator">
-                <div class="calculator-header">
-                    <h3>💼 Enhanced Money Management System</h3>
-                    <p>Updated strategy with improved recovery logic and 2-win daily target</p>
-                </div>
-                
-                <div class="input-group">
-                    <label for="capital">Your Account Balance ($)</label>
-                    <div class="capital-input">
-                        <input type="number" id="capital" min="100" value="100" placeholder="Enter your capital">
-                        <button class="preset-btn active" data-amount="100">$100</button>
-                        <button class="preset-btn" data-amount="200">$200</button>
-                        <button class="preset-btn" data-amount="300">$300</button>
-                        <button class="preset-btn" data-amount="400">$400</button>
-                        <button class="preset-btn" data-amount="500">$500</button>
+                <div class="motivation-box">
+                    <h3><i class="fas fa-quote-left"></i> Daily Motivation <i class="fas fa-quote-right"></i></h3>
+                    <div class="motivation-content" id="daily-motivation">
+                        <!-- Daily motivation will be inserted here -->
+                    </div>
+                    <div class="motivation-author" id="motivation-author">
+                        <!-- Author will be inserted here -->
                     </div>
                 </div>
-                
-                <div id="strategy-display" class="strategy-display">
-                    <!-- Strategy will be generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="calculator">
+        <div class="container">
+            <div class="calculator-header">
+                <h3><i class="fas fa-calculator"></i> Risk Management Calculator</h3>
+                <p>Enter your account balance and select the current day to calculate your risk amounts</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="capital"><i class="fas fa-wallet"></i> Your Account Balance ($)</label>
+                <div class="capital-input">
+                    <input type="number" id="capital" min="100" value="500" placeholder="Enter your capital">
+                    <button class="preset-btn" data-amount="100">$100</button>
+                    <button class="preset-btn" data-amount="200">$200</button>
+                    <button class="preset-btn" data-amount="300">$300</button>
+                    <button class="preset-btn active" data-amount="500">$500</button>
                 </div>
+            </div>
+            
+            <div class="input-group">
+                <label><i class="fas fa-calendar-day"></i> Select Today</label>
+                <div class="day-selection">
+                    <div class="day-btn" data-day="mon">
+                        <i class="fas fa-sun day-icon"></i>
+                        <span>Monday</span>
+                    </div>
+                    <div class="day-btn" data-day="tue">
+                        <i class="fas fa-cloud-sun day-icon"></i>
+                        <span>Tuesday</span>
+                    </div>
+                    <div class="day-btn" data-day="wed">
+                        <i class="fas fa-cloud day-icon"></i>
+                        <span>Wednesday</span>
+                    </div>
+                    <div class="day-btn" data-day="thu">
+                        <i class="fas fa-cloud-showers-heavy day-icon"></i>
+                        <span>Thursday</span>
+                    </div>
+                    <div class="day-btn" data-day="fri">
+                        <i class="fas fa-sun day-icon"></i>
+                        <span>Friday</span>
+                    </div>
+                    <div class="day-btn" data-day="sat">
+                        <i class="fas fa-moon day-icon"></i>
+                        <span>Saturday</span>
+                    </div>
+                    <div class="day-btn" data-day="sun">
+                        <i class="fas fa-moon day-icon"></i>
+                        <span>Sunday</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="risk-results" class="risk-results">
+                <!-- Risk results will be generated here -->
             </div>
         </div>
     </section>
@@ -808,25 +782,25 @@
             </div>
             
             <div class="resources">
-                <div class="resource-card">
+                <div class="resource-card animated-item">
                     <i class="fas fa-book"></i>
                     <h3>Trading Ledger</h3>
-                    <p>Check our trade history for proof of strategy performance</p>
+                    <p>Check our trade history for proof of strategy performance and track record of success</p>
                     <a href="https://tinyurl.com/YETI-TRDAE" class="btn" target="_blank">View Trading Ledger</a>
                 </div>
                 
-                <div class="resource-card">
+                <div class="resource-card animated-item">
                     <i class="fas fa-users"></i>
                     <h3>Trading Community</h3>
-                    <p>Join our exclusive Telegram community for daily signals, market analysis, and strategy discussions.</p>
+                    <p>Join our exclusive Telegram community for daily signals, market analysis, and strategy discussions with fellow traders</p>
                     <a href="https://t.me/+m5hZW5BFx5E1NTU1" class="btn" target="_blank">Join Community</a>
                 </div>
                 
-                <div class="resource-card">
+                <div class="resource-card animated-item">
                     <i class="fas fa-wallet"></i>
                     <h3>Account Setup</h3>
-                    <p>Create your Quotex account for optimal trading experience</p>
-                    <a href="https://broker-qx.pro/sign-up/?lid=1495461" class="btn" target="_blank">Create Quotex Account</a>
+                    <p>Create your Quotex account for optimal trading experience with our recommended broker</p>
+                    <a href="https://broker-qx.pro/sign-up/?lid=1526475" class="btn" target="_blank">Create Quotex Account</a>
                 </div>
             </div>
         </div>
@@ -839,24 +813,14 @@
                 <div class="footer-column">
                     <h3>YetiTrade</h3>
                     <p>Disciplined trading strategies for consistent growth. Our enhanced strategy focuses on risk management and psychological safety in trading.</p>
-                    <p><i class="fas fa-star"></i> Updated strategy backed by extensive testing</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#strategy">Trading Strategy</a></li>
-                        <li><a href="#calculator">Money Management</a></li>
-                        <li><a href="#principles">Core Principles</a></li>
-                        <li><a href="#resources">Learning Resources</a></li>
-                    </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Important Resources</h3>
                     <ul>
                         <li><i class="fab fa-telegram"></i> <a href="https://t.me/+m5hZW5BFx5E1NTU1" target="_blank">Join Trading Channel</a></li>
-                        <li><i class="fab fa-wallet"></i> <a href="https://broker-qx.pro/sign-up/?lid=1495461" target="_blank">Create Quotex Account</a></li>
+                        <li><i class="fab fa-wallet"></i> <a href="https://broker-qx.pro/sign-up/?lid=1526475" target="_blank">Create Quotex Account</a></li>
+                        <li><i class="fas fa-book"></i> <a href="https://tinyurl.com/YETI-TRDAE" target="_blank">Trading Ledger</a></li>
                     </ul>
                 </div>
                 
@@ -865,6 +829,7 @@
                     <ul>
                         <li><i class="fab fa-telegram"></i> <a href="https://t.me/planearn001" target="_blank">@planearn001</a></li>
                         <li><i class="fas fa-whatsapp"></i> +9779707162734</li>
+                        <li><i class="fas fa-envelope"></i> cryptodai3@gmail.com</li>
                     </ul>
                 </div>
             </div>
@@ -880,16 +845,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             const capitalInput = document.getElementById('capital');
             const presetButtons = document.querySelectorAll('.preset-btn');
-            const strategyDisplay = document.getElementById('strategy-display');
+            const dayButtons = document.querySelectorAll('.day-btn');
+            const riskResults = document.getElementById('risk-results');
+            const motivationElement = document.getElementById('daily-motivation');
+            const authorElement = document.getElementById('motivation-author');
             
-            // Set default strategy
-            generateStrategy(100);
+            // Set default values
+            let selectedDay = 'wed';
+            document.querySelector(`.day-btn[data-day="${selectedDay}"]`).classList.add('active');
             
-            // Input event
+            // Generate initial risk calculation
+            calculateRisk(500, selectedDay);
+            
+            // Capital input event
             capitalInput.addEventListener('input', function() {
-                const amount = parseInt(this.value) || 100;
-                generateStrategy(amount);
-                updateActiveButton(amount);
+                const amount = parseInt(this.value) || 500;
+                calculateRisk(amount, selectedDay);
             });
             
             // Preset button events
@@ -897,202 +868,183 @@
                 button.addEventListener('click', function() {
                     const amount = parseInt(this.dataset.amount);
                     capitalInput.value = amount;
-                    generateStrategy(amount);
-                    updateActiveButton(amount);
+                    presetButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    calculateRisk(amount, selectedDay);
                 });
             });
             
-            // Update active button
-            function updateActiveButton(amount) {
-                presetButtons.forEach(button => {
-                    if (parseInt(button.dataset.amount) === amount) {
-                        button.classList.add('active');
-                    } else {
-                        button.classList.remove('active');
+            // Day button events
+            dayButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    selectedDay = this.dataset.day;
+                    dayButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const amount = parseInt(capitalInput.value) || 500;
+                    calculateRisk(amount, selectedDay);
+                });
+            });
+            
+            // Motivation quotes for each day
+            const dailyMotivations = [
+                {
+                    quote: "Fam, remember — in trading both SL & TP are part of the game. 📉 Hitting SL doesn't mean failure, it means discipline. ❌ Do not overtrade. ✅ Stick to the plan.",
+                    author: "YetiTrade Team"
+                },
+                {
+                    quote: "Success in trading comes from consistency, not luck. Stick to your strategy, manage your risk, and the profits will follow.",
+                    author: "Trading Proverb"
+                },
+                {
+                    quote: "The market is a device for transferring money from the impatient to the patient. Be disciplined, be patient.",
+                    author: "Warren Buffett"
+                },
+                {
+                    quote: "Risk comes from not knowing what you're doing. With our strategy, you always know your risk. Stick to the plan!",
+                    author: "YetiTrade Team"
+                },
+                {
+                    quote: "It's not about how much you make, but how much you don't lose. Risk management is the key to longevity in trading.",
+                    author: "Paul Tudor Jones"
+                },
+                {
+                    quote: "Weekend wisdom: Review your trades, learn from your mistakes, and prepare for the week ahead. Continuous improvement is the path to success.",
+                    author: "YetiTrade Team"
+                },
+                {
+                    quote: "Sunday preparation sets the tone for your trading week. Plan your trades, set your risk levels, and get ready for success.",
+                    author: "Trading Wisdom"
+                }
+            ];
+            
+            // Set daily motivation
+            function setDailyMotivation() {
+                const date = new Date();
+                const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
+                
+                const motivation = dailyMotivations[dayOfWeek];
+                motivationElement.innerHTML = `<p class="highlight">${motivation.quote}</p>`;
+                authorElement.textContent = `- ${motivation.author}`;
+            }
+            
+            // Calculate risk based on capital and day
+            function calculateRisk(capital, day) {
+                // Day risk percentages
+                const dayRiskPercent = {
+                    'mon': 0.10,
+                    'tue': 0.20,
+                    'wed': 0.20,
+                    'thu': 0.20,
+                    'fri': 0.10,
+                    'sat': 0.10,
+                    'sun': 0.10
+                };
+                
+                // Get day risk amount
+                const dayRiskAmount = capital * dayRiskPercent[day];
+                
+                // First session risk percentages
+                const firstSessionRisks = [
+                    {percent: 0.01, label: "1% Risk"},
+                    {percent: 0.02, label: "2% Risk"},
+                    {percent: 0.05, label: "5% Risk"},
+                    {percent: 0.12, label: "12% Risk"},
+                    {percent: 0.25, label: "25% Risk"}
+                ];
+                
+                // Second session risk percentages
+                const secondSessionRisks = [
+                    {percent: 0.10, label: "10% Risk"},
+                    {percent: 0.20, label: "20% Risk"},
+                    {percent: 0.50, label: "50% Risk"},
+                    {percent: 0.20, label: "20% Risk"}
+                ];
+                
+                // Generate HTML for day risk summary
+                const dayNames = {
+                    'mon': 'Monday',
+                    'tue': 'Tuesday',
+                    'wed': 'Wednesday',
+                    'thu': 'Thursday',
+                    'fri': 'Friday',
+                    'sat': 'Saturday',
+                    'sun': 'Sunday'
+                };
+                
+                // Generate HTML for risk cards
+                function generateRiskCards(risks, dayRiskAmount) {
+                    let html = '<div class="risk-grid">';
+                    
+                    risks.forEach(risk => {
+                        const amount = dayRiskAmount * risk.percent;
+                        html += `
+                            <div class="risk-card">
+                                <h5>${risk.label}</h5>
+                                <div class="risk-amount">$${amount.toFixed(2)}</div>
+                                <div class="risk-percent">${(risk.percent * 100).toFixed(0)}% of day risk</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                    return html;
+                }
+                
+                // Generate results HTML
+                riskResults.innerHTML = `
+                    <div class="day-risk-summary">
+                        <h3>${dayNames[selectedDay]} Risk Summary</h3>
+                        <p>Day Risk Percentage: ${(dayRiskPercent[day] * 100).toFixed(0)}%</p>
+                        <div class="day-risk-amount">$${dayRiskAmount.toFixed(2)}</div>
+                        <p>This is your total risk amount for today</p>
+                    </div>
+                    
+                    <div class="session-box">
+                        <div class="session-header">
+                            <i class="fas fa-sun"></i>
+                            <h4>First Session Risk Amounts</h4>
+                        </div>
+                        <p>All traders can participate in the first session. Use these risk percentages as directed during the live session.</p>
+                        ${generateRiskCards(firstSessionRisks, dayRiskAmount)}
+                    </div>
+                    
+                    <div class="session-box">
+                        <div class="session-header">
+                            <i class="fas fa-moon"></i>
+                            <h4>Second Session Risk Amounts</h4>
+                        </div>
+                        ${capital >= 400 ? `
+                            <p>Your account qualifies for the second session ($400+ required).</p>
+                            ${generateRiskCards(secondSessionRisks, dayRiskAmount)}
+                        ` : `
+                            <p>Second session is only available for accounts with $400 or more.</p>
+                            <div class="restriction-note">
+                                <i class="fas fa-info-circle"></i> Upgrade your account to $400 or more to access the second trading session with enhanced opportunities.
+                            </div>
+                        `}
+                    </div>
+                `;
+            }
+            
+            // Add animations to elements when they come into view
+            function animateOnScroll() {
+                const animatedItems = document.querySelectorAll('.animated-item');
+                
+                animatedItems.forEach(item => {
+                    const itemPosition = item.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (itemPosition < screenPosition) {
+                        item.style.opacity = 1;
+                        item.classList.add('fade-in');
                     }
                 });
             }
             
-            // Generate strategy based on capital
-            function generateStrategy(capital) {
-                // Calculate risk amounts
-                const lowRiskAmount = capital * 0.10;
-                const highRiskAmount = capital * 0.20;
-                
-                // Calculate trade amounts for low risk
-                const lowRiskSteps = [
-                    Math.round(lowRiskAmount * 0.2),
-                    Math.round(lowRiskAmount * 0.3),
-                    Math.round(lowRiskAmount * 0.5)
-                ];
-                
-                // Calculate trade amounts for high risk
-                const highRiskSteps = [
-                    Math.round(highRiskAmount * 0.1),
-                    Math.round(highRiskAmount * 0.2),
-                    Math.round(highRiskAmount * 0.45),
-                    Math.round(highRiskAmount * 0.25)
-                ];
-                
-                // Daily profit target
-                const dailyProfitMin = Math.round(capital * 0.04);
-                const dailyProfitMax = Math.round(capital * 0.08);
-                
-                // Generate HTML
-                strategyDisplay.innerHTML = `
-                    <div class="market-split">
-                        <h3><i class="fas fa-sync-alt"></i> Market Split Logic</h3>
-                        <table class="market-table">
-                            <tr>
-                                <th>Days</th>
-                                <th>Market Nature</th>
-                                <th>Risk %</th>
-                                <th>Risk Amount</th>
-                                <th>Strategy Focus</th>
-                            </tr>
-                            <tr class="risk-low">
-                                <td>Fri–Mon</td>
-                                <td>Manipulated / OTC</td>
-                                <td>10%</td>
-                                <td>$${lowRiskAmount.toFixed(2)}</td>
-                                <td>Mental health, low risk</td>
-                            </tr>
-                            <tr class="risk-high">
-                                <td>Tue–Thu</td>
-                                <td>Pre-planned movement</td>
-                                <td>20%</td>
-                                <td>$${highRiskAmount.toFixed(2)}</td>
-                                <td>Strategic recovery & gain</td>
-                            </tr>
-                        </table>
-                    </div>
-                    
-                    <div class="trade-steps">
-                        <h4><i class="fas fa-brain"></i> Fri–Mon: Mental Safety Mode (10% Risk = $${lowRiskAmount.toFixed(2)})</h4>
-                        <table class="step-table">
-                            <tr>
-                                <th>Trade Step</th>
-                                <th>Trade Amount</th>
-                                <th>Outcome</th>
-                                <th>Next Step</th>
-                            </tr>
-                            <tr>
-                                <td>1st Trade</td>
-                                <td>$${lowRiskSteps[0]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Continue trading with $${lowRiskSteps[0]}<br>
-                                    Move to $${lowRiskSteps[1]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2nd Trade</td>
-                                <td>$${lowRiskSteps[1]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Back to 1st Trade Balance<br>
-                                    Move to $${lowRiskSteps[2]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3rd Trade</td>
-                                <td>$${lowRiskSteps[2]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Back to 2nd Trade Balance<br>
-                                    <strong>STOP</strong> – SL hit at $${lowRiskAmount.toFixed(2)}
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="strategy-note">
-                            <strong>Note:</strong> After recovering from a loss with a win (Trade 2), we HOLD the same amount for the next trade before returning to the initial amount. This enhances our recovery potential while maintaining discipline.
-                        </div>
-                    </div>
-                    
-                    <div class="trade-steps">
-                        <h4><i class="fas fa-chart-line"></i> Tue–Thu: Strategic Mode (20% Risk = $${highRiskAmount.toFixed(2)})</h4>
-                        <table class="step-table">
-                            <tr>
-                                <th>Trade Step</th>
-                                <th>Trade Amount</th>
-                                <th>Outcome</th>
-                                <th>Next Step</th>
-                            </tr>
-                            <tr>
-                                <td>1st Trade</td>
-                                <td>$${highRiskSteps[0]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Continue trading with $${highRiskSteps[0]}<br>
-                                    Move to $${highRiskSteps[1]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2nd Trade</td>
-                                <td>$${highRiskSteps[1]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Back to 1st Trade Balance<br>
-                                    Move to $${highRiskSteps[2]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3rd Trade</td>
-                                <td>$${highRiskSteps[2]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Back to 2nd Trade Balance<br>
-                                    Move to $${highRiskSteps[3]} trade
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4th Trade</td>
-                                <td>$${highRiskSteps[3]}</td>
-                                <td>
-                                    <span class="win-outcome">✅ Win</span><br>
-                                    <span class="loss-outcome">❌ Loss</span>
-                                </td>
-                                <td>
-                                    Back to 3rd Trade Balance<br>
-                                    <strong>STOP</strong> – SL hit at $${highRiskAmount.toFixed(2)}
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="strategy-note">
-                            <strong>Note:</strong> Enhanced recovery logic - After a win following a loss, we HOLD the same amount for the next trade to maximize recovery potential before returning to the initial trade amount.
-                        </div>
-                    </div>
-                    
-                    <div class="philosophy">
-                        <h4>🎯 Daily Goal & Trading Philosophy</h4>
-                        <ul>
-                            <li><strong>✅ Target 2 winning trades per day</strong> ($${dailyProfitMin}-$${dailyProfitMax}) - only consider a 3rd trade in exceptionally favorable market conditions</li>
-                            <li><strong>🔄 Enhanced recovery logic</strong> - After recovering from a loss with a win, we hold the same amount for the next trade</li>
-                            <li><strong>🚫 No overtrading</strong> – fewer, smarter trades with strict discipline</li>
-                            <li><strong>🔒 No compounding or doubling promises</strong> - structured risk management</li>
-                            <li><strong>🧠 We trade with discipline, not dreams - backed by extensive testing</strong></li>
-                        </ul>
-                    </div>
-                `;
-            }
+            // Initialize
+            setDailyMotivation();
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Initial check
         });
     </script>
 </body>
