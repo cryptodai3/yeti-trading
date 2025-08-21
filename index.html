@@ -683,7 +683,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="https://i.ibb.co/7N0t6N0J/Copilot-20250713-132321.png" alt="YetiTrade Logo">
+                    <img src="https://i.postimg.cc/ZBryn7DP/Yeti-Trade-logo.png" alt="YetiTrade Logo">
                     <h1>YetiTrade Risk Manager</h1>
                 </div>
             </div>
@@ -949,7 +949,8 @@
                     {percent: 0.02, label: "2% Risk"},
                     {percent: 0.05, label: "5% Risk"},
                     {percent: 0.12, label: "12% Risk"},
-                    {percent: 0.25, label: "25% Risk"}
+                    {percent: 0.30, label: "30% Risk"},
+                    {percent: 0.50, label: "50% Risk"}
                 ];
                 
                 // Second session risk percentages
@@ -994,9 +995,9 @@
                 riskResults.innerHTML = `
                     <div class="day-risk-summary">
                         <h3>${dayNames[selectedDay]} Risk Summary</h3>
-                        <p>Day Risk Percentage: ${(dayRiskPercent[day] * 100).toFixed(0)}%</p>
+                        <p>Day Risk Percentage: ${(dayRiskPercent * 100).toFixed(0)}%</p>
                         <div class="day-risk-amount">$${dayRiskAmount.toFixed(2)}</div>
-                        <p>This is your total risk amount for today</p>
+                        <p>This is your total risk amount for today's first session</p>
                     </div>
                     
                     <div class="session-box">
@@ -1013,13 +1014,13 @@
                             <i class="fas fa-moon"></i>
                             <h4>Second Session Risk Amounts</h4>
                         </div>
-                        ${capital >= 400 ? `
+                        ${capital >= 400 && day !== 'fri' ? `
                             <p>Your account qualifies for the second session ($400+ required).</p>
                             ${generateRiskCards(secondSessionRisks, dayRiskAmount)}
                         ` : `
-                            <p>Second session is only available for accounts with $400 or more.</p>
+                            <p>${day === 'fri' ? 'Second session is not available on Fridays.' : 'Second session is only available for accounts with $400 or more.'}</p>
                             <div class="restriction-note">
-                                <i class="fas fa-info-circle"></i> Upgrade your account to $400 or more to access the second trading session with enhanced opportunities.
+                                <i class="fas fa-info-circle"></i> ${day === 'fri' ? 'Friday has no second session to manage weekend risk exposure.' : 'Upgrade your account to $400 or more to access the second trading session with enhanced opportunities.'}
                             </div>
                         `}
                     </div>
