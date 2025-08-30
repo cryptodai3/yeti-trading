@@ -736,6 +736,10 @@
             <div class="input-group">
                 <label><i class="fas fa-calendar-day"></i> Select Today</label>
                 <div class="day-selection">
+                    <div class="day-btn" data-day="sun">
+                        <i class="fas fa-moon day-icon"></i>
+                        <span>Sunday</span>
+                    </div>
                     <div class="day-btn" data-day="mon">
                         <i class="fas fa-sun day-icon"></i>
                         <span>Monday</span>
@@ -752,17 +756,9 @@
                         <i class="fas fa-cloud-showers-heavy day-icon"></i>
                         <span>Thursday</span>
                     </div>
-                    <div class="day-btn" data-day="fri">
-                        <i class="fas fa-sun day-icon"></i>
-                        <span>Friday</span>
-                    </div>
                     <div class="day-btn" data-day="sat">
                         <i class="fas fa-moon day-icon"></i>
                         <span>Saturday</span>
-                    </div>
-                    <div class="day-btn" data-day="sun">
-                        <i class="fas fa-moon day-icon"></i>
-                        <span>Sunday</span>
                     </div>
                 </div>
             </div>
@@ -935,15 +931,14 @@
                     'tue': 0.20,
                     'wed': 0.20,
                     'thu': 0.20,
-                    'fri': 0.10,
                     'sat': 0.10,
                     'sun': 0.10
-                };
+                }
                 
                 // Get day risk amount
                 const dayRiskAmount = capital * dayRiskPercent[day];
                 
-                // First session risk percentages
+                // Session 🅰️ risk percentages
                 const firstSessionRisks = [
                     {percent: 0.01, label: "1% Risk"},
                     {percent: 0.02, label: "2% Risk"},
@@ -954,14 +949,15 @@
                     {percent: 0.50, label: "50% Risk"}
                 ];
                 
-                // Second session risk percentages
+                // Session 🅱️ risk percentages
                 const secondSessionRisks = [
+                    {percent: 0.01, label: "1% Risk"},
                     {percent: 0.05, label: "5% Risk"},
                     {percent: 0.10, label: "10% Risk"},
                     {percent: 0.20, label: "20% Risk"},
-                    {percent: 0.50, label: "50% Risk"},
-                    {percent: 0.20, label: "20% Risk"},
-                    {percent: 0.40, label: "40% Risk"}
+                    {percent: 0.30, label: "30% Risk"},
+                    {percent: 0.40, label: "40% Risk"},
+                    {percent: 0.50, label: "50% Risk"}
                 ];
                 
                 // Generate HTML for day risk summary
@@ -970,7 +966,6 @@
                     'tue': 'Tuesday',
                     'wed': 'Wednesday',
                     'thu': 'Thursday',
-                    'fri': 'Friday',
                     'sat': 'Saturday',
                     'sun': 'Sunday'
                 };
@@ -998,32 +993,22 @@
                 riskResults.innerHTML = `
                     <div class="day-risk-summary">
                         <h3>${dayNames[selectedDay]} Risk Summary</h3>
-                        <p>Day Risk Percentage: ${(dayRiskPercent * 100).toFixed(0)}%</p>
                         <div class="day-risk-amount">$${dayRiskAmount.toFixed(2)}</div>
-                        <p>This is your total risk amount for today's first session</p>
-                    </div>
-                    
-                    <div class="session-box">
-                        <div class="session-header">
-                            <i class="fas fa-sun"></i>
-                            <h4>First Session Risk Amounts</h4>
-                        </div>
-                        <p>All traders can participate in the first session. Use these risk percentages as directed during the live session.</p>
-                        ${generateRiskCards(firstSessionRisks, dayRiskAmount)}
+                        <p>This is your total risk amount for today's session</p>
                     </div>
                     
                     <div class="session-box">
                         <div class="session-header">
                             <i class="fas fa-moon"></i>
-                            <h4>Second Session Risk Amounts</h4>
+                            <h4>Session 🅰️ Risk Amounts</h4>
                         </div>
-                        ${capital >= 400 && day !== 'fri' ? `
-                            <p>Your account qualifies for the second session ($400+ required).</p>
+                        ${capital >= 100 && day !== 'fri' ? `
+                            <p>Your account qualifies for the session ($100+ required).</p>
                             ${generateRiskCards(secondSessionRisks, dayRiskAmount)}
                         ` : `
-                            <p>${day === 'fri' ? 'Second session is not available on Fridays.' : 'Second session is only available for accounts with $400 or more.'}</p>
+                            <p>${day === 'fri' ? 'Second session is not available on Fridays.' : 'Second session is only available for accounts with $100 or more.'}</p>
                             <div class="restriction-note">
-                                <i class="fas fa-info-circle"></i> ${day === 'fri' ? 'Friday has no second session to manage weekend risk exposure.' : 'Upgrade your account to $400 or more to access the second trading session with enhanced opportunities.'}
+                                <i class="fas fa-info-circle"></i> ${day === 'fri' ? 'Friday has no second session to manage weekend risk exposure.' : 'Upgrade your account to $100 or more to access the second trading session with enhanced opportunities.'}
                             </div>
                         `}
                     </div>
